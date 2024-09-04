@@ -61,7 +61,7 @@ export default async function ArgumentPage({
       <div className="flex justify-between mb-4 h-12 md:mx-8">
         <SocialShare
           title={parsedSummaryData.title}
-          url={`https://proto-app-zeta.vercel.app/start/search/${slugify(parsedSummaryData.title)}`}
+          url={`https://gnoseek.vercel.app/start/search/${slugify(parsedSummaryData.title)}`}
         />
         <AddToLibraryButton title={topic} sectionName={section} />
       </div>

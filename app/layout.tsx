@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "Gnoseek",
     description: "Learning platform with ai powered content",
     type: "website",
-    url: "https://yourapp.com",
+    url: "https://gnoseek.vercel.app",
   },
   twitter: {
     site: "@casiimir",
