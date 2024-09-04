@@ -1,33 +1,71 @@
+/* Font imports */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+
+/* Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* Base styles */
+body {
+  @apply text-asparagus-900;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+p {
+  @apply font-serif;
+}
+
+h1 {
+  @apply text-pine-cone-700;
+}
+
+mark {
+  padding: 0 4px;
+  background-color: #3d3532;
+  color: #fafafa;
+}
+
+/* Tailwind utilities */
+@layer utilities {
+  /* Scrollbar utilities */
+  .show-scrollbar {
+    &::-webkit-scrollbar {
+      display: auto;
+    }
+    -ms-overflow-style: auto;
+    scrollbar-width: auto;
+  }
+
+  .no-scrollbar {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Drag utilities */
+  .drag-none {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* Clerk styles */
+.cl-footer,
+.cl-navbar {
+  display: none;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Animations */
+@keyframes loop {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(6px, 3px);
   }
 }
