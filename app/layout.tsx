@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { LanguageProvider } from "@/app/contexts/LanguageContext";
+import { SectionDataProvider } from "@/app/contexts/SectionDataContext";
 import Navbar from "./components/molecules/Navbar";
 import "./globals.css";
 
@@ -48,10 +49,12 @@ export default function RootLayout({
         </head>
         <body className="min-h-screen flex flex-col">
           <LanguageProvider>
-            <Navbar />
-            <main className="flex-grow flex gap-4 mb-24 p-4 no-scrollbar md:ml-20 md:pl-8 md:mb-0">
-              <ConvexClientProvider>{children}</ConvexClientProvider>
-            </main>
+            <SectionDataProvider>
+              <Navbar />
+              <main className="flex-grow flex gap-4 mb-24 p-4 no-scrollbar md:ml-20 md:pl-8 md:mb-0">
+                <ConvexClientProvider>{children}</ConvexClientProvider>
+              </main>
+            </SectionDataProvider>
           </LanguageProvider>
         </body>
       </html>

@@ -1,14 +1,15 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useAction } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { useLanguage } from "@/app/contexts/LanguageContext";
 
+import { useLanguage } from "@/app/contexts/LanguageContext";
+import { useSectionData } from "@/app/contexts/SectionDataContext";
 import { slugify } from "@/app/utils";
 import PreSection from "@/app/components/atoms/PreSection";
 import { FlowchartData } from "@/types/components/main";
-import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
 
 interface FlowchartSectionProps {
   flowchartArgument: string;
@@ -26,14 +27,14 @@ interface FlowchartSectionProps {
 const FlowchartSection = ({
   flowchartArgument,
 }: FlowchartSectionProps): JSX.Element => {
+  const { language: lang } = useLanguage();
+  const { setSectionSelectedData } = useSectionData();
   const router = useRouter();
   const pathname = usePathname();
-  const { language: lang } = useLanguage();
   const [flowchartData, setFlowchartData] = useState<FlowchartData>();
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchFlowchart = useAction(api.ai.fetchFlowchart);
-
   /**
    * Fetches flowchart data from the API
    */
@@ -42,6 +43,10 @@ const FlowchartSection = ({
     await fetchFlowchart({ text: encodeURI(flowchartArgument), lang }).then(
       (data) => {
         setFlowchartData(JSON.parse(data));
+        setSectionSelectedData((prevData) => ({
+          ...prevData,
+          flowchartData: JSON.parse(data),
+        }));
         setIsLoading(false);
       }
     );

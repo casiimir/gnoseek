@@ -47,10 +47,6 @@ const SocialShare: React.FC<SocialShareProps> = ({
         <RedditIcon size={32} round={true} />
       </RedditShareButton>
 
-      <LinkedinShareButton url={url} title={title}>
-        <LinkedinIcon size={32} round={true} />
-      </LinkedinShareButton>
-
       <FacebookShareButton url={url} title={title}>
         <FacebookIcon size={32} round={true} />
       </FacebookShareButton>

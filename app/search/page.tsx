@@ -9,7 +9,7 @@ export default async function Search(): Promise<JSX.Element> {
   return (
     <div className="relative flex flex-col gap-12 p-8 w-full h-[calc(100vh-8rem)] md:h-[calc(100vh-2em)]">
       <Image
-        className="absolute top-0 left-0 w-full h-full rounded-2xl"
+        className="absolute top-0 left-0 w-full h-full rounded-2xl object-cover object-left"
         src={"/images/search_light.jpg"}
         alt="hero"
         width={1280}

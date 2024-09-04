@@ -49,6 +49,19 @@ export interface FlowchartData {
 }
 
 /**
+ * Represents a step in a flowchart.
+ * @interface Step
+ */
+export interface Step {
+  /** The step number or identifier */
+  step: string;
+  /** A description of the step */
+  description: string;
+  /** An example related to the step */
+  example: string;
+}
+
+/**
  * Represents the structure of study sheet data.
  * @interface StudySheetData
  */
@@ -83,19 +96,6 @@ export interface Content {
   example: string;
   /** The programming language used in the example */
   programmingLanguage: string;
-}
-
-/**
- * Represents a step in a flowchart.
- * @interface Step
- */
-export interface Step {
-  /** The step number or identifier */
-  step: string;
-  /** A description of the step */
-  description: string;
-  /** An example related to the step */
-  example: string;
 }
 
 /**
@@ -252,6 +252,14 @@ export interface Topic {
   text: string;
   /** An object containing translations of the topic */
   translations: Translations;
+}
+
+export interface SectionData {
+  summaryData?: SummaryData;
+  flashCardsData?: FlashcardsData;
+  keywordsData?: KeywordsData;
+  flowchartData?: FlowchartData;
+  studySheetData?: StudySheetData;
 }
 
 /**

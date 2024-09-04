@@ -5,6 +5,7 @@ import { FlashcardArray } from "react-quizlet-flashcard";
 import { api } from "@/convex/_generated/api";
 
 import { useLanguage } from "@/app/contexts/LanguageContext";
+import { useSectionData } from "@/app/contexts/SectionDataContext";
 import PreSection from "@/app/components/atoms/PreSection";
 import { Card } from "@/types/components/main";
 
@@ -56,6 +57,7 @@ const FlashcardsSection = ({
   section,
 }: FlashcardsSectionProps): JSX.Element => {
   const { language: lang } = useLanguage();
+  const { setSectionSelectedData } = useSectionData();
   const [flashcardsData, setFlashcardsData] = useState<Card[]>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -69,6 +71,10 @@ const FlashcardsSection = ({
     try {
       const data = await fetchFlashcards({ text: section, lang });
       setFlashcardsData(JSON.parse(data).flashcards);
+      setSectionSelectedData((prevData) => ({
+        ...prevData,
+        flashCardsData: JSON.parse(data).flashcards,
+      }));
     } catch (error) {
       console.error("Error fetching flashcards:", error);
     } finally {
@@ -98,5 +104,4 @@ const FlashcardsSection = ({
     </div>
   );
 };
-
 export default FlashcardsSection;

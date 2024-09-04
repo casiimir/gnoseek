@@ -9,7 +9,7 @@ export default function NotFoundPage(): JSX.Element {
   return (
     <div className="relative flex flex-col justify-center items-center w-full h-[calc(100vh-132px)] bg-pine-cone-100 shadow-pine-cone-400 shadow-sm md:h-[calc(100vh-2rem)] rounded-xl">
       <Image
-        className="absolute top-0 left-0 w-full h-full object-cover rounded-xl"
+        className="absolute top-0 left-0 w-full h-full object-cover object-center rounded-xl"
         src="/images/hero_light.jpg"
         alt="Page 404"
         width={1280}

@@ -4,6 +4,7 @@ import { useAction } from "convex/react";
 import { api } from "@/convex/_generated/api";
 
 import { useLanguage } from "@/app/contexts/LanguageContext";
+import { useSectionData } from "@/app/contexts/SectionDataContext";
 import KeywordsList from "@/app/components/molecules/KeywordsList";
 import PreSection from "@/app/components/atoms/PreSection";
 import { KeywordsData } from "@/types/components/main";
@@ -23,8 +24,9 @@ interface KeywordsSectionProps {
  * @param {KeywordsSectionProps} props - The component props
  * @returns {JSX.Element} The rendered component
  */
-const KeywordsSection = ({ section }: KeywordsSectionProps) => {
+const KeywordsSection = ({ section }: KeywordsSectionProps): JSX.Element => {
   const { language: lang } = useLanguage();
+  const { setSectionSelectedData } = useSectionData();
   const [keywordsData, setKeywordsData] = useState<KeywordsData>();
   const fetchKeywords = useAction(api.ai.fetchKeywords);
   const [isLoading, setIsLoading] = useState(false);
@@ -39,6 +41,10 @@ const KeywordsSection = ({ section }: KeywordsSectionProps) => {
       const data = await fetchKeywords({ text: encodeURI(section), lang });
 
       setKeywordsData(JSON.parse(data));
+      setSectionSelectedData((prevData) => ({
+        ...prevData,
+        keywordsData: JSON.parse(data),
+      }));
     } catch (error) {
       console.error("Error fetching keywords:", error);
     } finally {

@@ -1,6 +1,7 @@
 "use client";
+import { useEffect } from "react";
+import { useSectionData } from "@/app/contexts/SectionDataContext";
 import { SummaryData } from "@/types/components/main";
-
 /**
  * Props for the SummarySection component
  * @interface SummarySectionProps
@@ -19,6 +20,14 @@ interface SummarySectionProps {
 
 const SummarySection = ({ summaryData }: SummarySectionProps): JSX.Element => {
   const { title, subtitle, paragraphs } = summaryData;
+  const { setSectionSelectedData } = useSectionData();
+
+  useEffect(() => {
+    setSectionSelectedData((prevData) => ({
+      ...prevData,
+      summaryData: summaryData,
+    }));
+  }, [summaryData, setSectionSelectedData]);
 
   return (
     <div className="flex flex-col gap-4 lg:mx-8 w-full lg:w-3/5">

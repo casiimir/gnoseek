@@ -5,8 +5,9 @@ import { api } from "@/convex/_generated/api";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-import PreSection from "@/app/components/atoms/PreSection";
+import { useSectionData } from "@/app/contexts/SectionDataContext";
 import { useLanguage } from "@/app/contexts/LanguageContext";
+import PreSection from "@/app/components/atoms/PreSection";
 import { StudySheetData } from "@/types/components/main";
 
 /**
@@ -27,6 +28,7 @@ interface StudySheetSectionProps {
 
 const StudySheetSection = ({ studySheetArgument }: StudySheetSectionProps) => {
   const { language: lang } = useLanguage();
+  const { setSectionSelectedData } = useSectionData();
   const [studySheetData, setStudySheetData] = useState<StudySheetData>();
   const fetchStudySheet = useAction(api.ai.fetchStudySheet);
   const [isLoading, setIsLoading] = useState(false);
@@ -45,6 +47,10 @@ const StudySheetSection = ({ studySheetArgument }: StudySheetSectionProps) => {
       });
 
       setStudySheetData(JSON.parse(data));
+      setSectionSelectedData((prevData) => ({
+        ...prevData,
+        studySheetData: JSON.parse(data),
+      }));
     } catch (error) {
       console.error("Error fetching study sheet:", error);
     } finally {

@@ -40,7 +40,7 @@ const AddToLibraryButton: React.FC<AddToLibraryButtonProps> = ({
     setTimeout(() => {
       setAddedToLibrary(false);
       router.push("/start/library");
-    }, 3000);
+    }, 2000);
   };
 
   return (
@@ -58,7 +58,7 @@ const AddToLibraryButton: React.FC<AddToLibraryButtonProps> = ({
       {addedToLibrary && (
         <div className="toast toast-top" role="alert">
           <div className="alert alert-success bg-pine-cone-400 text-white text-sm">
-            <span>Item added to library!</span>
+            <span>Added!</span>
           </div>
         </div>
       )}

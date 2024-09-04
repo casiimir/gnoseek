@@ -2,31 +2,33 @@ import { cookies } from "next/headers";
 import { api } from "@/convex/_generated/api";
 import { convexClient } from "@/app/utils/convex";
 import { currentUser } from "@clerk/nextjs/server";
-import { slugify } from "@/app/utils";
+import { slugify } from "@/app/utils"; // Import the slugify function
 
-import AddToLibraryButton from "@/app/components/molecules/AddToLibraryButton";
+import PdfGenComponent from "@/app/components/molecules/PdfGenComponent";
 import SocialShare from "@/app/components/molecules/SocialShare";
-import FlashcardsSection from "@/app/components/organisms/FlashcardsSection";
+import AddToLibraryButton from "@/app/components/molecules/AddToLibraryButton";
 import SummarySection from "@/app/components/organisms/SummarySection";
+import FlashcardsSection from "@/app/components/organisms/FlashcardsSection";
 import KeywordsSection from "@/app/components/organisms/KeywordsSection";
 import FlowchartSection from "@/app/components/organisms/FlowchartSection";
 import StudySheetSection from "@/app/components/organisms/StudySheetSection";
 import { SummaryData } from "@/types/components/main";
 
+/**
+ * Props for the ArgumentPage component
+ * @interface ArgumentPageProps
+ * @property {Object} params - URL parameters
+ * @property {string} params.topic - The topic of the page
+ * @property {string} params.section - The section of the topic
+ */
 interface ArgumentPageProps {
   params: { topic: string; section: string };
 }
 
 /**
- * ArgumentPage component - Renders a page for a specific topic and section
- *
- * This component fetches and displays various study materials for a given topic and section,
- * including summary, flashcards, keywords, flowchart, and studysheet.
- *
- * @param {ArgumentPageProps} props - The props for the ArgumentPage component
- * @param {Object} props.params - The parameters passed to the page
- * @param {string} props.params.topic - The topic name
- * @param {string} props.params.section - The section name
+ * ArgumentPage component
+ * Renders a page with various sections related to a specific topic and section
+ * @param {ArgumentPageProps} props - The component props
  * @returns {Promise<JSX.Element>} The rendered ArgumentPage component
  */
 export default async function ArgumentPage({
@@ -36,10 +38,7 @@ export default async function ArgumentPage({
   const client = convexClient();
   const { topic, section } = params;
 
-  // Get the user's language preference from cookies, defaulting to 'en'
   const lang = cookieStore.get("lang")?.value || "en";
-
-  // Add to last read for logged-in users
   const loggedUser = await currentUser();
 
   if (loggedUser) {
@@ -58,11 +57,14 @@ export default async function ArgumentPage({
 
   return (
     <div className="w-full">
-      <div className="flex justify-between mb-4 h-12 md:mx-8">
-        <SocialShare
-          title={parsedSummaryData.title}
-          url={`https://gnoseek.vercel.app/start/search/${slugify(parsedSummaryData.title)}`}
-        />
+      <div className="flex justify-between items-center mb-4 h-12 md:mx-8">
+        <div className="flex gap-2">
+          <PdfGenComponent />
+          <SocialShare
+            title={parsedSummaryData.title}
+            url={`https://gnoseek.vercel.app/start/search/${slugify(parsedSummaryData.title)}`}
+          />
+        </div>
         <AddToLibraryButton title={topic} sectionName={section} />
       </div>
       <div className="flex flex-col gap-4 w-full lg:flex-row">
