@@ -1,4 +1,16 @@
+import { Metadata } from "next";
 import { SummaryData } from "@/types/components/main";
+
+/**
+ * Metadata for the About page
+ */
+export const metadata: Metadata = {
+  title: "About Gnoseek - Your Comprehensive Learning Platform",
+  description:
+    "Learn about Gnoseek, our mission, and how we're revolutionizing online learning with our comprehensive and engaging platform.",
+  keywords:
+    "gnoseek, learning, platform, comprehensive, engaging, online learning",
+};
 
 /**
  * Displays information about the platform, its features, and learning experience

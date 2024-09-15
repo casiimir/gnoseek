@@ -16,9 +16,9 @@ import { Id } from "@/convex/_generated/dataModel";
  * Metadata for the Home page
  */
 export const metadata: Metadata = {
-  title: "About Gnoseek - Your Comprehensive Learning Platform",
+  title: "Gnoseek - Your Comprehensive Learning Platform",
   description:
-    "Learn about Gnoseek, our mission, and how we're revolutionizing online learning with our comprehensive and engaging platform.",
+    "Gnoseek is an AI-powered knowledge explorer that generates comprehensive reports on any topic, formats code snippets beautifully, provides keywords, flashcards, study flowcharts, and examples.",
   keywords:
     "gnoseek, learning, platform, comprehensive, engaging, online learning",
 };
